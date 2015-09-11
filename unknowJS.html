@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="jquery-1.11.1.min.js"></script>
+    <script>
+
+//        function foo(str,a){
+////            "use strict";
+//            eval(str);
+//            console.log(a,b);
+//        }
+//        var b = 2;
+//        foo("var b = 4", 1);
+
+
+//        var obj = {
+//            a: 1,
+//            b: 2,
+//            c: 3
+//        };
+//
+//        obj.a = 2;
+//        obj.b = 3;
+//        obj.c = 4;
+//
+//        with(obj){
+//            a = 3;
+//            b = 4;
+//            c = 5;
+//        }
+//
+//        function foo1(obj){
+//            with(obj){
+//                a = 2;
+//            }
+//        }
+//
+//        var o1 = {
+//            a:3
+//        };
+//        var o2 = {
+//            b:3
+//        };
+//
+//        foo1(o1);
+//        console.log(o1.a);
+//
+//        foo1(o2);
+//        console.log(o2.a);
+//        console.log(a)
+
+//
+//        function doSomething(a){
+//            b = a + doSomethingElse(a * 2);
+//            console.log(b * 3);
+//        }
+//        function doSomethingElse(a){
+//            return a - 1;
+//        }
+//        var b;
+//
+//        doSomething(3);
+
+
+
+//        function doSomething(a){
+//            function doSomethingElse(a){
+//                return a -1;
+//            }
+//            var b;
+//            b = a + doSomethingElse(a * 2);
+//            console.log(b * 3);
+//        }
+//        doSomething(2);
+
+
+//        function abc(){
+//            var a = 10;
+//            return function () {
+//                a++;
+//                console.log(a);
+//            }
+//        }
+//        var foo = abc();
+//        foo();
+//        foo();
+
+//        var abc = (function(){
+//            var a=1;
+//            return function(){
+//                a++;
+//                console.log(a)
+//            }
+//        })()
+//        abc();
+//        abc();
+
+//
+//        window.onload = function(){
+//            var aLi = document.getElementsByTagName('li');
+//            for (var i=0;i<aLi.length;i++){
+//                (function(i){
+//                    aLi[i].onclick = function(){        //当点击时for循环已经结束
+//                        alert(i);
+//                    };
+//                })(i)
+//            }
+//        }
+
+
+
+
+//        "use strict";
+//            window.onload = function(){
+//                var aLi = document.getElementsByTagName('li');
+//                for (let i=0;i<aLi.length;i++){
+//                    aLi[i].onclick = function(){        //当点击时for循环已经结束
+//                        alert(i);
+//                    };
+//                }
+//            };
+
+
+
+//        var foo = true;
+//        if(foo){
+//            var bar = foo*2;
+//            bar = something(bar);
+//            console.log(bar)
+//        }
+//        function something(a){
+//            return a-1;
+//        }
+//
+//
+//        let i;
+//        for(i=0; i<10; i++){
+//            console.log(i)
+//        }
+
+
+
+//        function  coolModule(){
+//            var something = "cool";
+//            var another = [1,2,3];
+//
+//            function doSomething(){
+//                console.log(something)
+//            }
+//            function doAnother(){
+//                console.log(another.join("!"));
+//            }
+//            return {
+//                doSomething: doSomething,
+//                doAnother: doAnother
+//            }
+//        }
+//
+//        var foo = new coolModule();
+//        console.log(foo);
+//        foo.doSomething();
+//        foo.doAnother();
+
+
+//        var foo = (function(){
+//            var something = "cool";
+//            var another = [1,2,3];
+//
+//            function doSomething(){
+//                console.log(something)
+//            }
+//            function doAnother(){
+//                console.log(another.join("!"));
+//            }
+//            return {
+//                doSomething: doSomething,
+//                doAnother: doAnother
+//            }
+//        })();
+//        console.log(foo);
+//        foo.doSomething();
+//        foo.doAnother();
+
+
+//        function coolModule(id){
+//            function identify(){
+//                console.log(id)
+//            }
+//
+//            return {
+//                identify: identify
+//            }
+//        }
+//
+//        var foo1 = new coolModule("foot1");
+//        var foo2 = new coolModule("foot2");
+//
+//        foo1.identify();
+//        foo2.identify();
+
+//        var foo = (function coolModule(id){
+//            function change(){
+//                publicAPI.identify = identify2;
+//            }
+//            function identify1(){
+//                console.log(id);
+//            }
+//            function identify2(){
+//                console.log(id.toUpperCase());
+//            }
+//            var publicAPI = {
+//                change:change,
+//                identify : identify1
+//            };
+//            return publicAPI;
+//        })("foo module");
+//
+//        console.log(foo);
+//        foo.identify();
+//        foo.change();
+//        foo.identify();
+
+//        var MyModule = (function(){
+//            var modules = {};
+//            function define(name, deps, impl){
+//                for (var i=0; i<deps.length; i++){
+//                    deps[i] = modules[deps[i]];
+//                    console.log(deps[i])
+//                }
+//                modules[name] = impl.apply(impl, deps);
+//            }
+//            function get(name){
+//                return modules[name];
+//            }
+//            return {
+//                define: define,
+//                get:get
+//            }
+//        })();
+//
+//        MyModule.define("bar", [], function(){
+//            function hello(who){
+//                return "Let me introduce" + who;
+//            }
+//            return {
+//                hello: hello
+//            }
+//        });
+//        MyModule.define("bar1", [], function(){
+//            function test(who){
+//                return "Test1 " + who;
+//            }
+//            return {
+//                test: test
+//            }
+//        });
+//        MyModule.define("foo", ["bar"], function(bar){
+//            var hungry = "hippo";
+//            function awesome(){
+//                console.log(bar.hello(hungry).toUpperCase());
+//            }
+//            return {
+//                awesome: awesome
+//            }
+//        });
+//
+//        var bar = MyModule.get("bar");
+//        var foo = MyModule.get("foo");
+//
+//
+//        console.log(
+//                bar.hello("hippo")
+//        );
+//
+//        foo.awesome();
+
+//        var obj = {
+//            count: 0,
+//            cool: function(){
+//                if(this.count<1){
+//                    setTimeout(function(){
+//                        this.count++;
+//                        console.log(this)
+//                    }.bind(this), 1000)
+//                }
+//            }
+//        };
+//        obj.cool(); //'obg'    if without bind() this is 'window'
+
+
+
+
+//        function identify(){
+//            return this.name.toUpperCase();
+//        }
+//
+//        function speak(){
+//            var greeting = "Hello, I'm " + identify.call(this);
+//            console.log(greeting)
+//        }
+//
+//        var me = {
+//            name: "kyle"
+//        };
+//        var you = {
+//            name: "Reader"
+//        };
+//
+//
+//
+//        speak.call(me);
+//        speak.call(you);
+//
+////----------------------------------------------------------------------------------
+//
+//        function identify1(context){
+//            return context.name.toUpperCase();
+//        }
+//
+//        function speak1(context){
+//            var greeting = "Hello, I'm " + identify1(context);
+//            console.log(greeting)
+//        }
+//
+//        var me1 = {
+//            name: "kyle"
+//        }
+//        var you1 = {
+//            name: "Reader"
+//        }
+//
+//        console.log(identify1(me1))
+//        speak1(you1)
+//
+//
+//
+//        function foo(num){
+//            console.log("Foo: " + num);
+//            this.count++;
+//        }
+//        foo.count=0;
+//
+//        var i;
+//        for (i=0; i<10; i++){
+//            if(i>5){
+//                foo.call(foo, i)
+//            }
+//        }
+//        console.log(foo.count)
+
+
+//        function foo(){
+//            console.log(this.a)
+//        }
+//
+//        var obj = {
+//            a:2
+//        };
+//
+//        var bar = function(){
+//            foo.call(obj)
+//        };
+//
+//        bar();
+//        setTimeout(bar, 100);
+//        bar.call(window)
+
+
+//        function  foo(something){
+//            console.log(this.a, something);
+//            return this.a + something;
+//        }
+//
+//        var obj = {
+//            a:2
+//        };
+//
+//        var bar = function(){
+//            return foo.apply(obj, arguments);
+//        };
+//
+//        var b = bar(5);
+//        console.log(b);
+
+
+//        function foo(something){
+//            console.log(this.a, something);
+//            return this.a + something;
+//        }
+//
+//        function bind(fn, obj){
+//            return function () {
+//                return fn.apply(obj, arguments)
+//            }
+//        }
+//
+//        var obj={
+//            a:2
+//        };
+//
+//        var bar = bind(foo, obj);
+//        var b = bar(3);
+//        console.log(b);
+
+
+//        function foo(something){
+//            console.log(this.a, something);
+//            return this.a + something;
+//        }
+//        var obj={
+//            a:2
+//        };
+//        var bar = foo.bind(obj);
+//        var b = bar(5);
+//        console.log(b);
+
+
+//        function foo(el){
+//            console.log(el, this.id);
+//        }
+//        var obj = {
+//            id: "awesome"
+//        };
+//        [1,2,3].forEach(foo, obj);
+
+
+//        var myArray = ["foo", 42, "bar"];
+//        myArray[3] = "baz";
+//        console.log(myArray.length);
+//        console.log(myArray);
+
+//        function Vehicle(){
+//            this.engines = 1;
+//        }
+//        Vehicle.prototype.ignition = function(){
+//            console.log("Turning on my engine")
+//        }
+//        Vehicle.prototype.drive = function(){
+//            this.ignition();
+//            console.log("Steering and moving forward!")
+//        }
+//
+//        function Car(){
+//            var car = new Vehicle();
+//            car.wheels=4;
+//            var vehDriver = car.drive;
+//            car.drive = function(){
+//                vehDriver.call(this);
+//
+//                console.log("Rolling on all " + this.wheels+" wheels!")
+//            }
+//            return car;
+//        }
+//        var myCar = new Car();
+//        myCar.drive();
+
+//        function Foo(name){
+//            this.name = name;
+//        }
+//
+//        Foo.prototype.myName = function(){
+//            return this.name;
+//        };
+//
+//        function Bar(name, label){
+//            Foo.call(this,name);
+//            this.label = label;
+//        }
+//        Bar.prototype = Object.create(Foo.prototype);
+//
+//        Bar.prototype.myLabel = function () {
+//            return this.label;
+//        };
+//
+//        var a = new Bar("a", "obj a");
+//
+//        console.log(a.myName());
+//        console.log(a.myLabel());
+
+
+//---------------------------------------------------------------------------------
+
+//        function Widget(width, height){
+//            this.width = width || 70;
+//            this.height = height || 50;
+//            this.$elem = null;
+//        }
+//
+//        Widget.prototype.render = function($where){
+//            if(this.$elem){
+//                this.$elem.css({
+//                    width: this.width + "px",
+//                    height: this.height + "px"
+//                }).appendTo($where)
+//            }
+//        };
+//
+//        function Button(width, height, label){
+//            Widget.call(this, width, height);
+//            this.label = label || "default";
+//            this.$elem = $("<button>").text(this.label);
+//        }
+//        Button.prototype = Object.create(Widget.prototype);
+//
+//        Button.prototype.render = function ($where) {
+//            Widget.prototype.render.call(this, $where);
+//            this.$elem.click(this.onClick.bind(this))
+//        };
+//        Button.prototype.onClick = function (e) {
+//            console.log("Button '" + this.label + "' clicked!")
+//        };
+//
+//        $(function(){
+//            var $body = $(document.body);
+//
+//            var btn1 = new Button(100, 50, "btn1");
+//            var btn2 = new Button(120, 50, "btn2");
+//            var btn3 = new Button();
+//
+//            btn1.render($body);
+//            btn2.render($body);
+//            btn3.render($body);
+//        })
+
+
+
+//        var Widget = {
+//            init: function(width, height){
+//                this.width = width || 70;
+//                this.height = height ||50;
+//                this.$elem = null;
+//            },
+//            insert: function ($where) {
+//                if(this.$elem){
+//                    this.$elem.css({
+//                        width: this.width + "px",
+//                        height: this.height + "px"
+//                    }).appendTo($where)
+//                }
+//            }
+//        };
+//
+//        var Button = Object.create(Widget);
+//
+//        Button.setup = function (width, height, label) {
+//            this.init(width, height);
+//            this.label = label || "Default";
+//            this.$elem = $("<button>").text(this.label);
+//        };
+//        Button.build = function ($where) {
+//            this.insert($where);
+//            this.$elem.click(this.onClick.bind(this))
+//        };
+//        Button.onClick = function (e) {
+//            console.log("Button '" + this.label + "' clicked!")
+//        };
+//
+//        $(function(){
+//            var $body = $(document.body);
+//
+//            var btn1 = Object.create(Button);
+//            btn1.setup(125, 30, "hello");
+//
+//            var btn2 = Object.create(Button);
+//            btn2.setup(150,40, "world");
+//
+//            btn1.build($body);
+//            btn2.build($body);
+//
+////            Button.setup();
+////            Button.build($body)
+//
+//        })
+
+
+
+//----------------------------------------------------------------------------------------------------------------
+
+
+//        function Controller(){
+//            this.errors = [];
+//        }
+//        Controller.prototype.showDialog = function(title, msg){
+//            console.log(title + ": " + msg);
+//        };
+//        Controller.prototype.success = function (msg) {
+//            this.showDialog("Success", msg);
+//        };
+//        Controller.prototype.failure = function (err) {
+//            this.errors.push(err);
+//            this.showDialog("Error", err);
+//        };
+//
+//        function LoginController(){
+//            Controller.call(this)
+//        }
+//        LoginController.prototype = Object.create(Controller.prototype);
+//        LoginController.prototype.getUser = function () {
+//            return document.getElementById("login_username");
+//        };
+//        LoginController.prototype.getPassword = function () {
+//            return document.getElementById("login_password");
+//        };
+//        LoginController.prototype.validateEntry = function (user, pw) {
+//            user = user || this.getUser();
+//            pw = pw || this.getPassword();
+//
+//            if(!(user && pw)){
+//                return this.failure("Please enter a username & password!")
+//            }
+//            else if (user.length < 5){
+//                return this.failure("Password must be 5+ characters!")
+//            }
+//            return true;
+//        };
+//        LoginController.prototype.failure = function (err) {
+//            Controller.prototype.failure.call(this, "Login invalid: " + err);
+//        };
+//
+//
+//        function AuthController(login){
+//            Controller.call(this);
+//            this.login = login;
+//        }
+//        AuthController.prototype = Object.create(Controller.prototype);
+//        AuthController.prototype.server = function (url, data) {
+//            return $.ajax({
+//                url: url,
+//                data: data
+//            })
+//        };
+//        AuthController.prototype.checkAuth = function () {
+//            var user = this.login.getUser();
+//            var pw = this.login.getPassword();
+//
+//            if(this.login.validateEntry(user, pw)){
+//                this.server("/check-auth", {
+//                    user: user,
+//                    pw: pw
+//                })
+//                .then(this.success.bind(this))
+//                .fail(this.failure.bind(this))
+//            }
+//        };
+//        AuthController.prototype.success = function () {
+//            Controller.prototype.success.call(this, "Authenticated");
+//        };
+//        AuthController.prototype.failure = function (err) {
+//            Controller.prototype.failure.call(this, "Auth Failed: " + err);
+//        };
+//
+//        var auth = new AuthController(new LoginController());
+//        auth.checkAuth();
+
+        var LoginController = {
+            errors : [],
+            getUser : function () {
+                return document.getElementById("login_username");
+            },
+            getPassword: function () {
+                return document.getElementById("login_password");
+            },
+            validateEntry: function (user, pw) {
+                user = user || this.getUser();
+                pw = pw || this.getPassword();
+
+                if(!(user && pw)){
+                    return this.failure("Please enter a username & password!");
+                }
+                else if (user.length < 5){
+                    return this.failure("Username must be 5+ characters");
+                }
+                return true;
+            },
+            showDialog: function (title, msg) {
+                console.log(title + ": " + msg);
+            },
+            failure: function (err) {
+                this.errors.push(err);
+                this.showDialog("Error", "Login invalid: " + err);
+            }
+        };
+
+        var AuthController = Object.create(LoginController);
+
+        AuthController.errors = [];
+        AuthController.checkAuth = function () {
+            var user  = this.getUser();
+            var pw = this.getPassword();
+
+            if(this.validateEntry(user, pw)){
+                this.server("/check-auth", {
+                    user: user,
+                    pw: pw
+                })
+                .then(this.accepted.bind(this))
+                .fail(this.rejected.bind(this));
+            }
+        };
+        AuthController.server = function (url, data) {
+            return $.ajax({
+                url:url,
+                data: data
+            });
+        };
+        AuthController.accepted = function () {
+            this.showDialog("Success", "Authenticated")
+        };
+        AuthController.rejected = function (err) {
+            this.failure("Auth failler: "  + err)
+        };
+
+        AuthController.checkAuth();
+
+
+
+
+
+
+    </script>
+
+</head>
+<body>
+    <!--<ul>-->
+        <!--<li>123</li>-->
+        <!--<li>456</li>-->
+        <!--<li>789</li>-->
+        <!--<li>010</li>-->
+    <!--</ul>-->
+
+    <!--<input type="text" id="test1" name="test1">-->
+    <!--<input type="button" id="btn" value="click">-->
+    <input type="text" id="login_username"/>
+    <input type="password" id="login_password"/>
+    <input type="button" value="OK" id="clickButton"/>
+
+</body>
+</html>
